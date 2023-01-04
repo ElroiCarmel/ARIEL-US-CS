@@ -105,12 +105,8 @@ public class Point2D{
 	public void rotate(Point2D cen, double angleDegrees) {
 		//////////add your code below ///////////
 		angleDegrees=Math.toRadians(angleDegrees);
-		double dx = this.x()-cen.x();
-		double dy = this.y()-cen.y();
-		
 		double betta = angleDegrees+cen.getAngleFromPoints(this);
 		double r = this.distance(cen);
-		
 		this._x = cen.x() + (r*Math.cos(betta));
 		this._y = cen.y() + (r*Math.sin(betta));
 		/////////////////////////////////////////
