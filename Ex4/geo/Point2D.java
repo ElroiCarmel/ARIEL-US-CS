@@ -98,8 +98,7 @@ public class Point2D{
 	public double getAngleFromPoints(Point2D p) {
 		double dx = p.x()-this.x();
 		double dy = p.y()-this.y();
-		double offset = (p.x()<this.x()) ? Math.PI : 0;
-		return Math.atan(dy/dx) + offset;
+		return Math.atan2(dy, dx);
 		
 	}
 	
