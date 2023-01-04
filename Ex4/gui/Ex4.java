@@ -287,11 +287,13 @@ public class Ex4 implements Ex4_GUI {
 	}
 	
 	private void rotate() {
-		for (int i = 0; i < _shapes.size(); i++) {
-			GUI_Shapeable s = _shapes.get(i);
-			GeoShapeable g = s.getShape();
-			if (s.isSelected() && g != null) {
-				g.rotate(_p1, Math.toDegrees(_p1.getAngleFromPoints(_p2)));
+		if (_p1.x()!=_p2.x()&&_p1.y()!=_p2.y()) {
+			for (int i = 0; i < _shapes.size(); i++) {
+				GUI_Shapeable s = _shapes.get(i);
+				GeoShapeable g = s.getShape();
+				if (s.isSelected() && g != null) {
+					g.rotate(_p1, Math.toDegrees(_p1.getAngleFromPoints(_p2)));
+				}
 			}
 		}
 	}
