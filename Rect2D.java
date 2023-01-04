@@ -116,16 +116,13 @@ public class Rect2D implements GeoShapeable {
 //		ans[1] = new Point2D(maxX, maxY);
 //		return ans;
 		double[] pX = new double[] {_p1.x(), _p2.x(), _p3.x(), _p4.x()};
-		double minX=0;
-		double maxX=0;
 		double[] pY = new double[] {_p1.y(), _p2.y(), _p3.y(), _p4.y()};
-		double minY=0;
-		double maxY=0;
-		for (int i=0; i<pX.length; i++) {
-			if (pX[i]<minX) minX=pX[i];
-			if (pX[i]>maxX) maxX=pX[i];
-			if (pY[i]<minY) minY=pY[i];
-			if (pY[i]>maxY) maxY=pY[i];
+		Arrays.sort(pX);
+		Arrays.sort(pY);
+		Point2D[] ans = new Point2D[2];
+		ans[0] = new Point2D(pX[0], pY[0]);
+		ans[1] = new Point2D(pX[3], pY[3]);
+		return ans;
 		}
 	}
 
