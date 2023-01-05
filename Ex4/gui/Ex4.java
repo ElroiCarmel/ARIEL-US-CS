@@ -287,7 +287,6 @@ public class Ex4 implements Ex4_GUI {
 	}
 	
 	private void rotate() {
-		if (_p1.x()!=_p2.x()&&_p1.y()!=_p2.y()) {
 			for (int i = 0; i < _shapes.size(); i++) {
 				GUI_Shapeable s = _shapes.get(i);
 				GeoShapeable g = s.getShape();
@@ -296,7 +295,6 @@ public class Ex4 implements Ex4_GUI {
 				}
 			}
 		}
-	}
 
 	public void mouseRightClicked(Point2D p) {
 		System.out.println("right click!");
