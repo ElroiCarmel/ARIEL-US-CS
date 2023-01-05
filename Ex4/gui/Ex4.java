@@ -248,6 +248,26 @@ public class Ex4 implements Ex4_GUI {
 			}
 		}
 		
+		if(_mode.equals("Scale_90%")) {
+			for (int i = 0; i < _shapes.size(); i++) {
+				GUI_Shapeable s = _shapes.get(i);
+				GeoShapeable g = s.getShape();
+				if (s.isSelected() && g != null) {
+					g.scale(p, 0.9);
+				}
+			}
+		}
+		
+		if(_mode.equals("Scale_110%")) {
+			for (int i = 0; i < _shapes.size(); i++) {
+				GUI_Shapeable s = _shapes.get(i);
+				GeoShapeable g = s.getShape();
+				if (s.isSelected() && g != null) {
+					g.scale(p, 1.1);
+				}
+			}
+		}
+		
 		if (_mode.equals("Rotate")) {
 			if (_p1 == null) {
 				_p1 = new Point2D(p);
