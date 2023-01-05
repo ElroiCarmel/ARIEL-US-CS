@@ -9,7 +9,16 @@ package Exe.Ex4.geo;
  *
  */
 public class Polygon2D implements GeoShapeable{
-
+	//data
+	private Point2D[] _points;
+	private int _l;
+	
+	//constructors
+	public Polygon2D(Point2D[] p) {
+		this._points = p.clone();
+		this._l = p.length;
+	}
+	
 	@Override
 	public boolean contains(Point2D ot) {
 		// TODO Auto-generated method stub
@@ -25,13 +34,20 @@ public class Polygon2D implements GeoShapeable{
 	@Override
 	public double perimeter() {
 		// TODO Auto-generated method stub
-		return 0;
+		double ans=0;
+		for (int i=0; i<this._l-1; i++) {
+			ans += this._points[i].distance(this._points[i+1]);
+		}
+		ans += this._points[0].distance(this._points[this._l-1]);
+		return ans;
 	}
 
 	@Override
 	public void move(Point2D vec) {
 		// TODO Auto-generated method stub
-		
+		for (int i=0; i<this._l;i++) {
+			this._points[i].move(vec);
+		}
 	}
 
 	@Override
@@ -43,19 +59,23 @@ public class Polygon2D implements GeoShapeable{
 	@Override
 	public void scale(Point2D center, double ratio) {
 		// TODO Auto-generated method stub
-		
+		for (int i=0; i<this._l;i++) {
+			this._points[i].scale(center, ratio);
+		}
 	}
 
 	@Override
 	public void rotate(Point2D center, double angleDegrees) {
 		// TODO Auto-generated method stub
-		
+		for (int i=0; i<this._l;i++) {
+			this._points[i].scale(center, angleDegrees);
+		}
 	}
 
 	@Override
 	public Point2D[] getPoints() {
 		// TODO Auto-generated method stub
-		return null;
+		return this._points.clone();
 	}
 	
 }
