@@ -1,5 +1,7 @@
 package Exe.Ex4.geo;
 
+import java.util.ArrayList;
+
 /**
  * This class represents a 2D polygon, as in https://en.wikipedia.org/wiki/Polygon
  * This polygon can be assumed to be simple in terms of area and contains.
@@ -10,13 +12,19 @@ package Exe.Ex4.geo;
  */
 public class Polygon2D implements GeoShapeable{
 	//data
-	private Point2D[] _points;
-	private int _l;
+	private ArrayList<Point2D> _points;
 	
 	//constructors
-	public Polygon2D(Point2D[] p) {
-		this._points = p.clone();
-		this._l = p.length;
+	public Polygon2D() {
+		_points = new ArrayList<>();
+	}
+	
+	public Polygon2D(ArrayList<Point2D> p) {
+		_points = (ArrayList<Point2D>) p.clone();
+	}
+	
+	public void addPoint(Point2D p) {
+		_points.add(new Point2D(p));
 	}
 	
 	@Override
@@ -35,47 +43,62 @@ public class Polygon2D implements GeoShapeable{
 	public double perimeter() {
 		// TODO Auto-generated method stub
 		double ans=0;
-		for (int i=0; i<this._l-1; i++) {
-			ans += this._points[i].distance(this._points[i+1]);
+		for (int i=0; i<_points.size()-1; i++) {
+			ans += _points.get(i).distance(_points.get(i+1));
 		}
-		ans += this._points[0].distance(this._points[this._l-1]);
+		ans += _points.get(0).distance(_points.get(_points.size()-1));
 		return ans;
 	}
 
 	@Override
 	public void move(Point2D vec) {
 		// TODO Auto-generated method stub
-		for (int i=0; i<this._l;i++) {
-			this._points[i].move(vec);
+		for (int i=0; i<_points.size();i++) {
+			_points.get(i).move(vec);
 		}
 	}
 
 	@Override
 	public GeoShapeable copy() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Polygon2D(_points);
 	}
 
 	@Override
 	public void scale(Point2D center, double ratio) {
 		// TODO Auto-generated method stub
-		for (int i=0; i<this._l;i++) {
-			this._points[i].scale(center, ratio);
+		for (int i=0; i<_points.size();i++) {
+			_points.get(i).scale(center, ratio);
 		}
 	}
 
 	@Override
 	public void rotate(Point2D center, double angleDegrees) {
 		// TODO Auto-generated method stub
-		for (int i=0; i<this._l;i++) {
-			this._points[i].scale(center, angleDegrees);
+		for (int i=0; i<_points.size();i++) {
+			_points.get(i).scale(center, angleDegrees);
 		}
 	}
 
 	@Override
 	public Point2D[] getPoints() {
 		// TODO Auto-generated method stub
-		return this._points.clone();
+		return (Point2D[]) _points.toArray();
+	}
+	
+	public double[] getX() {
+		double[] ans = new double[_points.size()];
+		for (int i=0; i<_points.size();i++) {
+			ans[i] = _points.get(i).x();
+		}
+		return ans;
+	}
+	public double[] getY() {
+		double[] ans = new double[_points.size()];
+		for (int i=0; i<_points.size();i++) {
+			ans[i] = _points.get(i).y();
+		}
+		return ans;
 	}
 	
 }
