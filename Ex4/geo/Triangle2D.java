@@ -67,7 +67,9 @@ public class Triangle2D implements GeoShapeable{
 	@Override
 	public void scale(Point2D center, double ratio) {
 		// TODO Auto-generated method stub
-		
+		_p1.scale(center, ratio);
+		_p2.scale(center, ratio);
+		_p3.scale(center, ratio);
 	}
 
 	@Override
