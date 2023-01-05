@@ -2,6 +2,7 @@ package Exe.Ex4.gui;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.text.Segment;
 
@@ -35,6 +36,7 @@ public class Ex4 implements Ex4_GUI {
 	private String _mode = "";
 	private Point2D _p1;
 	private Point2D _p2; // For drawing Triangle2D
+	private ArrayList<Point2D> _polyPoints = new ArrayList<>(); // For drawing Polygon2D
 
 	private static Ex4 _winEx4 = null;
 
@@ -110,12 +112,22 @@ public class Ex4 implements Ex4_GUI {
 				}
 			} 
 
+		if (gs instanceof Polygon2D) {
+			Polygon2D poly = (Polygon2D) gs;
+			if (isFill) {
+				StdDraw_Ex4.filledPolygon(poly.getX(), poly.getY());
+			} else {
+				StdDraw_Ex4.polygon(poly.getX(), poly.getY());
+			}
+		} 
+		
 		if (gs instanceof Segment2D) {
 			Segment2D s = (Segment2D) gs;
 			Point2D p1 = s.getPoints()[0];
 			Point2D p2 = s.getPoints()[1];
 			StdDraw_Ex4.line(p1.x(), p1.y(), p2.x(), p2.y());
 		}
+		
 		if (gs instanceof Triangle2D) {
 			Triangle2D t = (Triangle2D) gs;
 			double[] x = new double[] { t.getPoints()[0].x(), t.getPoints()[1].x(), t.getPoints()[2].x() };
@@ -202,6 +214,20 @@ public class Ex4 implements Ex4_GUI {
 				_p1 = null;
 			}
 		}
+		if (_mode.equals("Polygon")) {
+			if (_gs == null) {
+				_polyPoints.add(p);
+				_p1 = new Point2D(p);
+			} else {
+				_polyPoints.add(p);
+//				_gs.setColor(_color);
+//				_gs.setFilled(_fill);
+//				_shapes.add(_gs);
+//				_gs = null;
+//				_p1 = null;
+			}
+		}
+		
 		if (_mode.equals("Triangle")) {
 			if (_gs == null) {
 				_p1 = new Point2D(p);
@@ -318,7 +344,16 @@ public class Ex4 implements Ex4_GUI {
 
 	public void mouseRightClicked(Point2D p) {
 		System.out.println("right click!");
-
+		if (_mode.equals("Polygon") && _gs!=null) {
+		Polygon2D poly = new Polygon2D(_polyPoints);
+		_gs = new GUIShape(poly, _fill, _color, 0);
+		_shapes.add(_gs);
+		_gs = null;
+		_p1 = null;
+		_polyPoints.clear();
+		drawShapes();
+		}
+	
 	}
 
 	public void mouseMoved(MouseEvent e) {
@@ -331,6 +366,11 @@ public class Ex4 implements Ex4_GUI {
 			if (_mode.equals("Circle")) {
 				double r = _p1.distance(p);
 				gs = new Circle2D(_p1, r);
+			}
+			if (_mode.equals("Polygon")) {
+				Polygon2D poly = new Polygon2D(_polyPoints);
+				poly.addPoint(p);
+				gs = poly;
 			}
 			if (_mode.equals("Triangle")) {
 				if (_p2 != null) {
