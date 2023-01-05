@@ -333,12 +333,10 @@ public class Ex4 implements Ex4_GUI {
 				gs = new Circle2D(_p1, r);
 			}
 			if (_mode.equals("Triangle")) {
-				if (_p1 != null) {
-					if (_p2 != null) {
-						gs = new Triangle2D(_p1, _p2, p);
-					} else {
-						gs = new Segment2D(_p1, p);
-					}
+				if (_p2 != null) {
+					gs = new Triangle2D(_p1, _p2, p);
+				} else {
+					gs = new Segment2D(_p1, p);
 				}
 			}
 			if (_mode.equals("Segment")) {
