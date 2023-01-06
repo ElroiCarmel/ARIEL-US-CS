@@ -92,16 +92,11 @@ public class Point2D{
 	/////////////////////// You should implement the methods below ///////////////////////////
 	public void scale(Point2D cen, double ratio) {
 		//////////add your code below ///////////
-		Point2D secondVector = new Point2D(cen.vector(this));
-		secondVector.multiply(ratio);
-		this._x = cen.x()+secondVector.x();
-		this._y = cen.y()+secondVector.y();
+		this._x = ratio*(this._x-cen._x) + cen._x;
+		this._y = ratio*(this._y-cen._y) + cen._y;
 		/////////////////////////////////////////
 	}
-	public void multiply(double skalar) {
-		this._x *= skalar;
-		this._y *= skalar;
-	}
+
 	public double getAngleFromPoints(Point2D p) {
 		double dx = p.x()-this.x();
 		double dy = p.y()-this.y();
