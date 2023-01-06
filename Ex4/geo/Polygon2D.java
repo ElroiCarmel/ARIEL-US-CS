@@ -36,7 +36,21 @@ public class Polygon2D implements GeoShapeable{
 	@Override
 	public double area() {
 		// TODO Auto-generated method stub
-		return 0;
+		// Shoelace formula
+		double[] x = this.getX();
+		double[] y = this.getY();
+		double firstSigma = 0;
+		double secondSigma = 0;
+		for(int i=0; i<x.length-1;i++) {
+			firstSigma += x[i]*y[i+1];
+		}
+		for(int i=0; i<y.length-1;i++) {
+			secondSigma += y[i]*x[i+1];
+		}
+		double X_nY_1 = x[x.length-1]*y[0];
+		double X_1Y_n = x[0]*y[y.length-1];
+		double ans = 0.5*Math.abs(firstSigma+X_nY_1-secondSigma-X_1Y_n);
+		return ans;
 	}
 
 	@Override
