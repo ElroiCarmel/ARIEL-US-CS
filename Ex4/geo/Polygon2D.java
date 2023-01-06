@@ -30,7 +30,26 @@ public class Polygon2D implements GeoShapeable{
 	@Override
 	public boolean contains(Point2D ot) {
 		// TODO Auto-generated method stub
-		return false;
+		if (_points.size()==2) {
+			return (new Segment2D(_points.get(0), _points.get(1)).contains(ot));
+		}
+		double[] x = this.getX().clone();
+		Arrays.sort(x);
+		int hit =0;
+		Line2D.Double ray = new Line2D.Double(ot.x(), ot.y(),x[x.length-1]+1 ,ot.y());
+		for (int i=0; i<_points.size()-1;i++) {
+			Point2D first = _points.get(i);
+			Point2D second = _points.get(i+1);
+			Line2D.Double side = new Line2D.Double(first.x(), first.y(), second.x(), second.y());
+			if (ray.intersectsLine(side)) {
+				hit++;
+			}
+		}
+		Point2D p1 = _points.get(0);
+		Point2D pLast = _points.get(_points.size()-1);
+		Line2D.Double lastSide = new Line2D.Double(p1.x(), p1.y(), pLast.x(), pLast.y());
+		if (ray.intersectsLine(lastSide)) hit++;
+		return (hit%2!=0);
 	}
 
 	@Override
