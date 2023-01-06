@@ -76,7 +76,7 @@ public class Polygon2D implements GeoShapeable{
 	public void rotate(Point2D center, double angleDegrees) {
 		// TODO Auto-generated method stub
 		for (int i=0; i<_points.size();i++) {
-			_points.get(i).scale(center, angleDegrees);
+			_points.get(i).rotate(center, angleDegrees);
 		}
 	}
 
