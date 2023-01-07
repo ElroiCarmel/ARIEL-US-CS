@@ -1,6 +1,8 @@
 package Exe.Ex4.geo;
 
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class represents a 2D polygon, as in https://en.wikipedia.org/wiki/Polygon
@@ -86,30 +88,34 @@ public class Polygon2D implements GeoShapeable{
 	@Override
 	public void move(Point2D vec) {
 		// TODO Auto-generated method stub
-		for (int i=0; i<_points.size();i++) {
-			_points.get(i).move(vec);
+		for (Point2D p : _points) {
+			p.move(vec);
 		}
 	}
 
 	@Override
 	public GeoShapeable copy() {
 		// TODO Auto-generated method stub
-		return new Polygon2D(_points);
+		ArrayList<Point2D> copyPoints = new ArrayList();
+		for (Point2D p : _points) {
+			copyPoints.add(new Point2D(p));
+		}
+		return new Polygon2D(copyPoints);
 	}
 
 	@Override
 	public void scale(Point2D center, double ratio) {
 		// TODO Auto-generated method stub
-		for (int i=0; i<_points.size();i++) {
-			_points.get(i).scale(center, ratio);
+		for (Point2D p : _points) {
+			p.scale(center, ratio);
 		}
 	}
 
 	@Override
 	public void rotate(Point2D center, double angleDegrees) {
 		// TODO Auto-generated method stub
-		for (int i=0; i<_points.size();i++) {
-			_points.get(i).rotate(center, angleDegrees);
+		for (Point2D p : _points) {
+			p.rotate(center, angleDegrees);
 		}
 	}
 
