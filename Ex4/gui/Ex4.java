@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.text.Segment;
+//import javax.swing.text.Segment;
 
 import Exe.Ex4.Ex4_Const;
 import Exe.Ex4.GUIShape;
@@ -102,15 +102,15 @@ public class Ex4 implements Ex4_GUI {
 			}
 		}
 		if (gs instanceof Rect2D) {
-				Rect2D r = (Rect2D) gs;
-				double[] x = new double[] { r.get_p1().x(), r.get_p3().x(), r.get_p2().x(), r.get_p4().x() };
-				double[] y = new double[] { r.get_p1().y(), r.get_p3().y(), r.get_p2().y(), r.get_p4().y() };
-				if (isFill) {
-					StdDraw_Ex4.filledPolygon(x, y);
-				} else {
-					StdDraw_Ex4.polygon(x, y);
-				}
-			} 
+			Rect2D r = (Rect2D) gs;
+			double[] x = new double[] { r.get_p1().x(), r.get_p3().x(), r.get_p2().x(), r.get_p4().x() };
+			double[] y = new double[] { r.get_p1().y(), r.get_p3().y(), r.get_p2().y(), r.get_p4().y() };
+			if (isFill) {
+				StdDraw_Ex4.filledPolygon(x, y);
+			} else {
+				StdDraw_Ex4.polygon(x, y);
+			}
+		} 
 
 		if (gs instanceof Polygon2D) {
 			Polygon2D poly = (Polygon2D) gs;
@@ -120,14 +120,14 @@ public class Ex4 implements Ex4_GUI {
 				StdDraw_Ex4.polygon(poly.getX(), poly.getY());
 			}
 		} 
-		
+
 		if (gs instanceof Segment2D) {
 			Segment2D s = (Segment2D) gs;
 			Point2D p1 = s.getPoints()[0];
 			Point2D p2 = s.getPoints()[1];
 			StdDraw_Ex4.line(p1.x(), p1.y(), p2.x(), p2.y());
 		}
-		
+
 		if (gs instanceof Triangle2D) {
 			Triangle2D t = (Triangle2D) gs;
 			double[] x = new double[] { t.getPoints()[0].x(), t.getPoints()[1].x(), t.getPoints()[2].x() };
@@ -196,8 +196,30 @@ public class Ex4 implements Ex4_GUI {
 		if (p.equals("Clear")) {
 			_shapes.removeAll();
 		}
-		if (_mode.equals("Remove")) {
+		if (p.equals("Remove")) {
 			remove();
+		}
+		if (p.equals("All")) {
+			for (int i = 0; i < _shapes.size(); i++) {
+				GUI_Shapeable s = _shapes.get(i);
+				s.setSelected(true);
+			}
+		}
+		if (p.equals("None")) {
+			for (int i = 0; i < _shapes.size(); i++) {
+				GUI_Shapeable s = _shapes.get(i);
+				s.setSelected(false);
+			}
+		}
+		if (p.equals("Anti")) {
+			for (int i = 0; i < _shapes.size(); i++) {
+				GUI_Shapeable s = _shapes.get(i);
+				if (s.isSelected()) {
+					s.setSelected(false);
+				} else {
+					s.setSelected(true);
+				}
+			}
 		}
 
 		drawShapes();
@@ -225,7 +247,7 @@ public class Ex4 implements Ex4_GUI {
 				_polyPoints.add(p);
 			}
 		}
-		
+
 		if (_mode.equals("Triangle")) {
 			if (_gs == null) {
 				_p1 = new Point2D(p);
@@ -262,6 +284,8 @@ public class Ex4 implements Ex4_GUI {
 				_p1 = null;
 			}
 		}
+
+
 		if (_mode.equals("Move")) {
 			if (_p1 == null) {
 				_p1 = new Point2D(p);
@@ -271,7 +295,17 @@ public class Ex4 implements Ex4_GUI {
 				_p1 = null;
 			}
 		}
-		
+
+		if (_mode.equals("Copy")) {
+			if (_p1 == null) {
+				_p1 = new Point2D(p);
+			} else {
+				_p1 = new Point2D(p.x() - _p1.x(), p.y() - _p1.y());
+				copy();
+				_p1 = null;
+			}
+		}
+
 		if(_mode.equals("Scale_90%")) {
 			for (int i = 0; i < _shapes.size(); i++) {
 				GUI_Shapeable s = _shapes.get(i);
@@ -281,7 +315,7 @@ public class Ex4 implements Ex4_GUI {
 				}
 			}
 		}
-		
+
 		if(_mode.equals("Scale_110%")) {
 			for (int i = 0; i < _shapes.size(); i++) {
 				GUI_Shapeable s = _shapes.get(i);
@@ -291,7 +325,7 @@ public class Ex4 implements Ex4_GUI {
 				}
 			}
 		}
-		
+
 		if (_mode.equals("Rotate")) {
 			if (_p1 == null) {
 				_p1 = new Point2D(p);
@@ -302,7 +336,7 @@ public class Ex4 implements Ex4_GUI {
 				_p2 = null;
 			}
 		}
-		
+
 		if (_mode.equals("Point")) {
 			select(p);
 		}
@@ -329,6 +363,21 @@ public class Ex4 implements Ex4_GUI {
 			}
 		}
 	}
+
+	private void copy() {
+		for (int i = 0; i < _shapes.size(); i++) {
+			GUI_Shapeable s = _shapes.get(i);
+			GeoShapeable g = s.getShape();
+			if (s.isSelected() && g != null) {				
+				GUI_Shapeable temp = s.copy();
+				temp.setSelected(false);
+				temp.getShape().move(_p1);
+				_shapes.add(temp);
+
+			}
+		}
+	}
+
 	private void remove() {
 		for (int i = 0; i < _shapes.size(); i++) {
 			GUI_Shapeable s = _shapes.get(i);
@@ -338,28 +387,29 @@ public class Ex4 implements Ex4_GUI {
 			}
 		}
 	}
+
 	private void rotate() {
-			for (int i = 0; i < _shapes.size(); i++) {
-				GUI_Shapeable s = _shapes.get(i);
-				GeoShapeable g = s.getShape();
-				if (s.isSelected() && g != null) {
-					g.rotate(_p1, Math.toDegrees(_p1.getAngleFromPoints(_p2)));
-				}
+		for (int i = 0; i < _shapes.size(); i++) {
+			GUI_Shapeable s = _shapes.get(i);
+			GeoShapeable g = s.getShape();
+			if (s.isSelected() && g != null) {
+				g.rotate(_p1, Math.toDegrees(_p1.getAngleFromPoints(_p2)));
 			}
 		}
+	}
 
 	public void mouseRightClicked(Point2D p) {
 		System.out.println("right click!");
 		if (_mode.equals("Polygon") && _gs!=null) {
-		Polygon2D poly = new Polygon2D(_polyPoints);
-		_gs = new GUIShape(poly, _fill, _color, 0);
-		_shapes.add(_gs);
-		_gs = null;
-		_p1 = null;
-		_polyPoints.clear();
-		drawShapes();
+			Polygon2D poly = new Polygon2D(_polyPoints);
+			_gs = new GUIShape(poly, _fill, _color, 0);
+			_shapes.add(_gs);
+			_gs = null;
+			_p1 = null;
+			_polyPoints.clear();
+			drawShapes();
 		}
-	
+
 	}
 
 	public void mouseMoved(MouseEvent e) {
@@ -367,7 +417,7 @@ public class Ex4 implements Ex4_GUI {
 			double x1 = StdDraw_Ex4.mouseX();
 			double y1 = StdDraw_Ex4.mouseY();
 			GeoShapeable gs = null;
-//			System.out.println("M: "+x1+","+y1);
+			//			System.out.println("M: "+x1+","+y1);
 			Point2D p = new Point2D(x1, y1);
 			if (_mode.equals("Circle")) {
 				double r = _p1.distance(p);
