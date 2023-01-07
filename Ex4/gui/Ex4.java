@@ -196,6 +196,9 @@ public class Ex4 implements Ex4_GUI {
 		if (p.equals("Clear")) {
 			_shapes.removeAll();
 		}
+		if (_mode.equals("Remove")) {
+			remove();
+		}
 
 		drawShapes();
 
@@ -326,7 +329,15 @@ public class Ex4 implements Ex4_GUI {
 			}
 		}
 	}
-	
+	private void remove() {
+		for (int i = 0; i < _shapes.size(); i++) {
+			GUI_Shapeable s = _shapes.get(i);
+			GeoShapeable g = s.getShape();
+			if (s.isSelected() && g != null) {
+				_shapes.removeElementAt(i);
+			}
+		}
+	}
 	private void rotate() {
 			for (int i = 0; i < _shapes.size(); i++) {
 				GUI_Shapeable s = _shapes.get(i);
