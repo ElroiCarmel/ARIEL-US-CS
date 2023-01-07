@@ -220,11 +220,6 @@ public class Ex4 implements Ex4_GUI {
 				_p1 = new Point2D(p);
 			} else {
 				_polyPoints.add(p);
-//				_gs.setColor(_color);
-//				_gs.setFilled(_fill);
-//				_shapes.add(_gs);
-//				_gs = null;
-//				_p1 = null;
 			}
 		}
 		
