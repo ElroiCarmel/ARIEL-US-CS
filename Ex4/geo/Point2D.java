@@ -106,23 +106,11 @@ public class Point2D{
 	
 	public void rotate(Point2D cen, double angleDegrees) {
 		//////////add your code below ///////////
-		// !! Remember java works in radians!
 		angleDegrees=Math.toRadians(angleDegrees);
-		/* https://matthew-brett.github.io/teaching/rotation_2d.html
-		 * Formula:
-		 * x2 = cos(alpha)*x1 - sin(alpah)*y1
-		 * y2 = sin(alpah)*x1 + cos(alpha)*y1
-		 */
-		// Compute vector from center to src
-		Point2D vector = cen.vector(this);
-		// Rotate vector using formula
-		double x2 = Math.cos(angleDegrees)*vector.x() - Math.sin(angleDegrees)*vector.y();
-		double y2 = Math.sin(angleDegrees)*vector.x() + Math.cos(angleDegrees)*vector.y();
-		Point2D rotatedVector = new Point2D(x2,y2);
-		// Get final vector [center+rotatedVector]
-		Point2D ans = new Point2D(cen.add(rotatedVector));
-		this._x=ans._x;
-		this._y=ans._y;
+		double betta = angleDegrees+cen.getAngleFromPoints(this);
+		double r = this.distance(cen);
+		this._x = cen.x() + (r*Math.cos(betta));
+		this._y = cen.y() + (r*Math.sin(betta));
 		/////////////////////////////////////////
 	}
    
