@@ -3,6 +3,7 @@ package Exe.Ex4.gui;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 
 //import javax.swing.text.Segment;
 
@@ -17,6 +18,7 @@ import Exe.Ex4.geo.Point2D;
 import Exe.Ex4.geo.Polygon2D;
 import Exe.Ex4.geo.Rect2D;
 import Exe.Ex4.geo.Segment2D;
+import Exe.Ex4.geo.ShapeComp;
 import Exe.Ex4.geo.Triangle2D;
 
 /**
@@ -220,6 +222,27 @@ public class Ex4 implements Ex4_GUI {
 					s.setSelected(true);
 				}
 			}
+		}
+		if (p.equals("ByToString")) {
+			_shapes.sort(ShapeComp.CompByToString);
+		}
+		if (p.equals("ByArea")) {
+			_shapes.sort(ShapeComp.CompByArea);
+		}
+		if (p.equals("ByAntiArea")) {
+			_shapes.sort(ShapeComp.CompByAntiArea);
+		}
+		if (p.equals("ByPerimeter")) {
+			_shapes.sort(ShapeComp.CompByPerimeter);
+		}
+		if (p.equals("ByAntiPerimeter")) {
+			_shapes.sort(ShapeComp.CompByAntiPerimeter);
+		}
+		if (p.equals("ByTag")) {
+			_shapes.sort(ShapeComp.CompByTag);
+		}
+		if (p.equals("ByAntiTag")) {
+			_shapes.sort(ShapeComp.CompByAntiTag);
 		}
 
 		drawShapes();
