@@ -18,17 +18,17 @@ public class Rect2D implements GeoShapeable {
 	private Point2D _p3;
 	private Point2D _p4;
 	//constructor
-	public Rect2D(Point2D p1, Point2D p2) {
+	public Rect2D(Point2D p1, Point2D p2, Point2D p3, Point2D p4) {
 		this._p1 = new Point2D(p1);
 		this._p2 = new Point2D(p2); 
-		this._p3 = new Point2D(p2.x(), p1.y());
-		this._p4 = new Point2D(p1.x(), p2.y());
+		this._p3 = new Point2D(p3);
+		this._p4 = new Point2D(p4);
 	}
 	@Override
 	public boolean contains(Point2D ot) {
-		Triangle2D t1 = new Triangle2D(ot, _p1, _p3);
-		Triangle2D t2 = new Triangle2D(ot, _p3, _p2);
-		Triangle2D t3 = new Triangle2D(ot, _p2, _p4);
+		Triangle2D t1 = new Triangle2D(ot, _p1, _p2);
+		Triangle2D t2 = new Triangle2D(ot, _p2, _p3);
+		Triangle2D t3 = new Triangle2D(ot, _p3, _p4);
 		Triangle2D t4 = new Triangle2D(ot, _p4, _p1);
 		double sumAreas = t1.area()+t2.area()+t3.area()+t4.area();
 		return (Math.abs(this.area()-sumAreas)<= Ex4_Const.EPS);
@@ -48,16 +48,16 @@ public class Rect2D implements GeoShapeable {
 
 	@Override
 	public double area() {
-		double width = _p1.distance(_p3);
-		double height = _p3.distance(_p2);
+		double width = _p1.distance(_p2);
+		double height = _p2.distance(_p3);
 		return width*height;
 
 	}
 
 	@Override
 	public double perimeter() {
-		double width = _p1.distance(_p3);
-		double height = _p3.distance(_p2);
+		double width = _p1.distance(_p2);
+		double height = _p2.distance(_p3);
 		return 2*width+2*height;
 	}
 
@@ -74,7 +74,7 @@ public class Rect2D implements GeoShapeable {
 	@Override
 	public GeoShapeable copy() {
 		// TODO Auto-generated method stub
-		return new Rect2D(_p1, _p2);
+		return new Rect2D(_p1, _p2, _p3, _p4);
 	}
 
 	@Override
