@@ -105,8 +105,8 @@ public class Ex4 implements Ex4_GUI {
 		}
 		if (gs instanceof Rect2D) {
 			Rect2D r = (Rect2D) gs;
-			double[] x = new double[] { r.get_p1().x(), r.get_p3().x(), r.get_p2().x(), r.get_p4().x() };
-			double[] y = new double[] { r.get_p1().y(), r.get_p3().y(), r.get_p2().y(), r.get_p4().y() };
+			double[] x = new double[] { r.get_p1().x(), r.get_p2().x(), r.get_p3().x(), r.get_p4().x() };
+			double[] y = new double[] { r.get_p1().y(), r.get_p2().y(), r.get_p3().y(), r.get_p4().y() };
 			if (isFill) {
 				StdDraw_Ex4.filledPolygon(x, y);
 			} else {
@@ -462,7 +462,9 @@ public class Ex4 implements Ex4_GUI {
 				gs = new Segment2D(_p1, p);
 			}
 			if (_mode.equals("Rect")) {
-				gs = new Rect2D(_p1, p);
+				Point2D p2 = new Point2D(p.x(), _p1.y());
+				Point2D p4 = new Point2D(_p1.x(), p.y());
+				gs = new Rect2D(_p1, p2, p, p4);
 			}
 
 			_gs = new GUIShape(gs, false, Color.pink, 0);
