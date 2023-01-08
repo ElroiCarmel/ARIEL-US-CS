@@ -393,7 +393,6 @@ public class Ex4 implements Ex4_GUI {
 			GeoShapeable g = s.getShape();
 			if (s.isSelected() && g != null) {				
 				GUI_Shapeable temp = s.copy();
-				temp.setSelected(false);
 				temp.getShape().move(_p1);
 				_shapes.add(temp);
 
