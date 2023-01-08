@@ -1,6 +1,7 @@
 package Exe.Ex4;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 import Exe.Ex4.geo.Rect2D;
@@ -17,6 +18,9 @@ public class ShapeCollection implements ShapeCollectionable{
 	public ShapeCollection() {
 		_shapes = new ArrayList<GUI_Shapeable>();
 	}
+	public ShapeCollection(ArrayList<GUI_Shapeable> shapes) {
+		_shapes = shapes;
+	}
 	@Override
 	public GUI_Shapeable get(int i) {
 		return _shapes.get(i);
@@ -30,15 +34,15 @@ public class ShapeCollection implements ShapeCollectionable{
 	@Override
 	public GUI_Shapeable removeElementAt(int i) {
 		//////////add your code below ///////////
-		
-		return null;
+		_shapes.remove(i);
+		return _shapes.get(i);
 		//////////////////////////////////////////
 	}
 
 	@Override
 	public void addAt(GUI_Shapeable s, int i) {
 		//////////add your code below ///////////
-		
+		_shapes.add(i, s);
 		
 		//////////////////////////////////////////
 	}
@@ -51,15 +55,19 @@ public class ShapeCollection implements ShapeCollectionable{
 	@Override
 	public ShapeCollectionable copy() {
 		//////////add your code below ///////////
-		
-		return null;
+		ArrayList<GUI_Shapeable> copyShapes = new ArrayList<GUI_Shapeable>();
+		for (GUI_Shapeable s : _shapes) {
+			GUI_Shapeable sCopy = s.copy();
+			copyShapes.add(sCopy);
+		}
+		return new ShapeCollection(copyShapes);
 		//////////////////////////////////////////
 	}
 
 	@Override
 	public void sort(Comparator<GUI_Shapeable> comp) {
 		//////////add your code below ///////////
-		
+		Collections.sort(_shapes, comp);
 		
 		//////////////////////////////////////////
 	}
@@ -67,7 +75,7 @@ public class ShapeCollection implements ShapeCollectionable{
 	@Override
 	public void removeAll() {
 		//////////add your code below ///////////
-		
+		_shapes.clear();
 		
 		//////////////////////////////////////////
 	}
