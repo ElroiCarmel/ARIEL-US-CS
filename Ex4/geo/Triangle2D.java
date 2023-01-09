@@ -10,6 +10,11 @@ import Exe.Ex4.gui.Ex4;
  *
  */
 public class Triangle2D implements GeoShapeable{
+	@Override
+	public String toString() {
+		return "Triangle2D," + _p1 + "," + _p2 + "," + _p3;
+	}
+
 	private Point2D _p1;
 	private Point2D _p2;
 	private Point2D _p3;
@@ -83,8 +88,45 @@ public class Triangle2D implements GeoShapeable{
 	@Override
 	public Point2D[] getPoints() {
 		// TODO Auto-generated method stub
-		Point2D[] ans = new Point2D[] {this._p1, this._p2, this._p3};
+		Point2D[] ans = new Point2D[3];
+		ans[0] = new Point2D(this._p1);
+		ans[1] = new Point2D(this._p2);
+		ans[2] = new Point2D(this._p3);
 		return ans;
 	}
-	
+	////////////Private Functions////////////////
+	///// Will be used for getting bounding box of shape collection
+
+	public double getMinX() {
+		Point2D[] points = this.getPoints();
+		double ans = points[0].x();
+		for (Point2D p : points) {
+			if (p.x()<ans) ans=p.x();
+		}
+		return ans;
+	}
+	public double getMaxX() {
+		Point2D[] points = this.getPoints();
+		double ans = points[0].x();
+		for (Point2D p : points) {
+			if (p.x()>ans) ans=p.x();
+		}
+		return ans;
+	}
+	public double getMinY() {
+		Point2D[] points = this.getPoints();
+		double ans = points[0].y();
+		for (Point2D p : points) {
+			if (p.y()<ans) ans=p.y();
+		}
+		return ans;
+	}
+	public double getMaxY() {
+		Point2D[] points = this.getPoints();
+		double ans = points[0].y();
+		for (Point2D p : points) {
+			if (p.y()>ans) ans=p.y();
+		}
+		return ans;
+	}
 }
