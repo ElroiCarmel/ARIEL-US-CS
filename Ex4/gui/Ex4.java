@@ -2,8 +2,11 @@ package Exe.Ex4.gui;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+
+import javax.swing.JFileChooser;
 
 //import javax.swing.text.Segment;
 
@@ -39,7 +42,8 @@ public class Ex4 implements Ex4_GUI {
 	private Point2D _p1;
 	private Point2D _p2; // For drawing Triangle2D
 	private ArrayList<Point2D> _polyPoints = new ArrayList<>(); // For drawing Polygon2D
-
+	
+	private int shapeCount=0;
 	private static Ex4 _winEx4 = null;
 
 	private Ex4() {
@@ -197,6 +201,7 @@ public class Ex4 implements Ex4_GUI {
 		}
 		if (p.equals("Clear")) {
 			_shapes.removeAll();
+			shapeCount=0;
 		}
 		if (p.equals("Remove")) {
 			remove();
@@ -244,7 +249,47 @@ public class Ex4 implements Ex4_GUI {
 		if (p.equals("ByAntiTag")) {
 			_shapes.sort(ShapeComp.CompByAntiTag);
 		}
+		
+		if(p.equals("Info")) {
+			String str = getInfo();
+			System.out.println(str);
+		}
 
+		if(p.equals("Save")) {
+			//https://www.codejava.net/java-se/swing/show-simple-open-file-dialog-using-jfilechooser
+			JFileChooser filechooser = new JFileChooser();
+			filechooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+			int res = filechooser.showSaveDialog(StdDraw_Ex4.getFrame());
+			
+			if(res == JFileChooser.APPROVE_OPTION) {
+				try {
+					filechooser.getSelectedFile().getAbsoluteFile().createNewFile();
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				_shapes.save(filechooser.getSelectedFile().getPath());
+			}
+		}
+		
+		// Work similar to the same
+		if(p.equals("Load")) {
+			JFileChooser filechooser = new JFileChooser();
+			filechooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+			int res = filechooser.showOpenDialog(StdDraw_Ex4.getFrame());
+			
+			if(res == JFileChooser.APPROVE_OPTION) {
+				try {
+					filechooser.getSelectedFile().getAbsoluteFile().createNewFile();
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				_shapes.load(filechooser.getSelectedFile().getPath());
+			}
+		}
+		
+		
 		drawShapes();
 
 	}
@@ -258,6 +303,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
+				shapeCount++;
 				_gs = null;
 				_p1 = null;
 			}
@@ -280,6 +326,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
+				shapeCount++;
 				_gs = null;
 				_p1 = null;
 				_p2 = null;
@@ -292,6 +339,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
+				shapeCount++;
 				_gs = null;
 				_p1 = null;
 			}
@@ -303,6 +351,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
+				shapeCount++;
 				_gs = null;
 				_p1 = null;
 			}
@@ -393,6 +442,7 @@ public class Ex4 implements Ex4_GUI {
 			GeoShapeable g = s.getShape();
 			if (s.isSelected() && g != null) {				
 				GUI_Shapeable temp = s.copy();
+				temp.setTag(shapeCount++); 
 				temp.getShape().move(_p1);
 				_shapes.add(temp);
 
@@ -424,12 +474,19 @@ public class Ex4 implements Ex4_GUI {
 		System.out.println("right click!");
 		if (_mode.equals("Polygon") && _gs!=null) {
 			Polygon2D poly = new Polygon2D(_polyPoints);
-			_gs = new GUIShape(poly, _fill, _color, 0);
+			_gs = new GUIShape(poly, _fill, _color, shapeCount);
 			_shapes.add(_gs);
+			shapeCount++;
 			_gs = null;
 			_p1 = null;
 			_polyPoints.clear();
 			drawShapes();
+		} else if (_gs!=null) {
+			_gs=null;
+			_p1=null;
+			_p2=null;
+			drawShapes();
+
 		}
 
 	}
@@ -466,7 +523,7 @@ public class Ex4 implements Ex4_GUI {
 				gs = new Rect2D(_p1, p2, p, p4);
 			}
 
-			_gs = new GUIShape(gs, false, Color.pink, 0);
+			_gs = new GUIShape(gs, false, Color.pink, shapeCount);
 			drawShapes();
 		}
 	}
