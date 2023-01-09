@@ -37,6 +37,7 @@ public class Point2D{
  
     public int ix() {return (int)_x;}
     public int iy() {return (int)_y;}
+    
   
     public Point2D add(Point2D p) {
     	Point2D a = new Point2D(p.x()+x(),p.y()+y());
@@ -89,14 +90,15 @@ public class Point2D{
 		this._y += vec.y();
 	}
 	
+	
 	/////////////////////// You should implement the methods below ///////////////////////////
 	public void scale(Point2D cen, double ratio) {
 		//////////add your code below ///////////
 		this._x = ratio*(this._x-cen._x) + cen._x;
 		this._y = ratio*(this._y-cen._y) + cen._y;
+		
 		/////////////////////////////////////////
 	}
-
 	public double getAngleFromPoints(Point2D p) {
 		double dx = p.x()-this.x();
 		double dy = p.y()-this.y();
@@ -108,9 +110,9 @@ public class Point2D{
 		//////////add your code below ///////////
 		angleDegrees=Math.toRadians(angleDegrees);
 		double betta = angleDegrees+cen.getAngleFromPoints(this);
-		double r = this.distance(cen);
-		this._x = cen.x() + (r*Math.cos(betta));
-		this._y = cen.y() + (r*Math.sin(betta));
+		double d = this.distance(cen);
+		this._x = cen.x() + (d*Math.cos(betta));
+		this._y = cen.y() + (d*Math.sin(betta));
 		/////////////////////////////////////////
 	}
    
