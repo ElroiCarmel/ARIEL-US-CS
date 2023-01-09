@@ -13,6 +13,14 @@ import java.util.Arrays;
  *
  */
 public class Polygon2D implements GeoShapeable{
+	@Override
+	public String toString() {
+		String str = "Polygon2D";
+		for (Point2D point : _points) {
+			str += "," + point;
+		}
+		return str;
+	}
 	//data
 	private ArrayList<Point2D> _points;
 	
@@ -96,6 +104,7 @@ public class Polygon2D implements GeoShapeable{
 	@Override
 	public GeoShapeable copy() {
 		// TODO Auto-generated method stub
+		// Deep copy to ArrayLisy that contains Objects
 		ArrayList<Point2D> copyPoints = new ArrayList();
 		for (Point2D p : _points) {
 			copyPoints.add(new Point2D(p));
@@ -124,7 +133,7 @@ public class Polygon2D implements GeoShapeable{
 		// TODO Auto-generated method stub
 		return (Point2D[]) _points.toArray();
 	}
-	
+	////////////Private Functions////////////////
 	public double[] getX() {
 		double[] ans = new double[_points.size()];
 		for (int i=0; i<_points.size();i++) {
@@ -139,5 +148,42 @@ public class Polygon2D implements GeoShapeable{
 		}
 		return ans;
 	}
-	
+	///// Will be used for getting bounding box of shape collection
+
+	public double getMinX() {
+		double ans=0;
+		double[] allX = this.getX();
+		ans= allX[0];
+		for (int i=0; i<allX.length; i++) {
+			if (allX[i]<ans) ans=allX[i];
+		}
+		return ans;
+	}
+	public double getMaxX() {
+		double ans=0;
+		double[] allX = this.getX();
+		ans= allX[0];
+		for (int i=0; i<allX.length; i++) {
+			if (allX[i]>ans) ans=allX[i];
+		}
+		return ans;
+	}
+	public double getMinY() {
+		double ans=0;
+		double[] allY = this.getY();
+		ans= allY[0];
+		for (int i=0; i<allY.length; i++) {
+			if (allY[i]<ans) ans=allY[i];
+		}
+		return ans;
+	}
+	public double getMaxY() {
+		double ans=0;
+		double[] allY = this.getY();
+		ans= allY[0];
+		for (int i=0; i<allY.length; i++) {
+			if (allY[i]>ans) ans=allY[i];
+		}
+		return ans;
+	}
 }
