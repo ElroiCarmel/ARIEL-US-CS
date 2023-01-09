@@ -20,7 +20,7 @@ public class Circle2D implements GeoShapeable{
 	
 	@Override
 	public String toString()
-	{ return _center.toString()+", "+_radius;}
+	{ return "Circle2D," + _center.toString()+ ","+_radius;}
 	
 	@Override
 	public boolean contains(Point2D ot) {
@@ -66,5 +66,20 @@ public class Circle2D implements GeoShapeable{
 		_center.rotate(center, angleDegrees);
 		//////////////////////////////////////////
 	}
-
+	
+	////////////Private Functions////////////////
+	///// Will be used for getting bounding box of shape collection
+	public double getMinX() {
+		return this._center.x()-this._radius;
+	}
+	public double getMaxX() {
+		return this._center.x()+this._radius;
+	}
+	public double getMinY() {
+		return this._center.y()-this._radius;
+	}
+	public double getMaxY() {
+		return this._center.y()-this._radius;
+	}
+	
 }
