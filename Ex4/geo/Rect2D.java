@@ -96,6 +96,10 @@ public class Rect2D implements GeoShapeable {
 	}
 
 	@Override
+	public String toString() {
+		return "Rect2D," + _p1 + "," + _p2 + "," + _p3 + "," + _p4;
+	}
+	@Override
 	public Point2D[] getPoints() {
 		double[] pX = new double[] {_p1.x(), _p2.x(), _p3.x(), _p4.x()};
 		double[] pY = new double[] {_p1.y(), _p2.y(), _p3.y(), _p4.y()};
@@ -106,6 +110,21 @@ public class Rect2D implements GeoShapeable {
 		ans[1] = new Point2D(pX[3], pY[3]);
 		return ans;
 		}
+	////////////Private Functions////////////////
+	///// Will be used for getting bounding box of shape collection
+
+	public double getMinX() {
+		return this.getPoints()[0].x();
 	}
+	public double getMaxX() {
+		return this.getPoints()[1].x();
+	}
+	public double getMinY() {
+		return this.getPoints()[0].y();
+	}
+	public double getMaxY() {
+		return this.getPoints()[1].y();
+	}
+}
 
 
