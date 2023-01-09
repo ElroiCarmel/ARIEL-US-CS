@@ -10,6 +10,11 @@ import Exe.Ex4.Ex4_Const;
  */
 public class Segment2D implements GeoShapeable{
 	
+	@Override
+	public String toString() {
+		return "Segment2D," + _p1 + "," + _p2;
+	}
+
 	private Point2D _p1;
 	private Point2D _p2;
 	
@@ -69,9 +74,23 @@ public class Segment2D implements GeoShapeable{
 	public Point2D[] getPoints() {
 		// TODO Auto-generated method stub
 		Point2D[] ans = new Point2D[2];
-		ans[0] = _p1;
-		ans[1] = _p2;
+		ans[0] = this._p1;
+		ans[1] = this._p2;
 		return ans;
 	}
-	
+	////////////Private Functions////////////////
+	///// Will be used for getting bounding box of shape collection
+
+	public double getMinX() {
+		return Math.min(_p1.x(), _p2.x());
+	}
+	public double getMaxX() {
+		return Math.max(_p1.x(), _p2.x());
+	}
+	public double getMinY() {
+		return Math.min(_p1.y(), _p2.y());
+	}
+	public double getMaxY() {
+		return Math.max(_p1.y(), _p2.y());
+	}
 }
