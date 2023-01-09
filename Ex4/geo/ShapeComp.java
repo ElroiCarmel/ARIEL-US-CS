@@ -74,18 +74,18 @@ public class ShapeComp implements Comparator<GUI_Shapeable>{
 			}
 		}
 		if(_flag == Ex4_Const.Sort_By_Tag) {
-			if (o1.getTag()>o2.getTag()) {
+			if (o1.getTag()<o2.getTag()) {
 				ans = -1;
-			} else if (o1.getTag()<o2.getTag()) {
+			} else if (o1.getTag()>o2.getTag()) {
 				ans = 1;
 			} else {
 				ans = 0;
 			}
 		}
 		if(_flag == Ex4_Const.Sort_By_Anti_Tag) {
-			if (o1.getTag()<o2.getTag()) {
+			if (o1.getTag()>o2.getTag()) {
 				ans = -1;
-			} else if (o1.getTag()>o2.getTag()) {
+			} else if (o1.getTag()<o2.getTag()) {
 				ans = 1;
 			} else {
 				ans = 0;
