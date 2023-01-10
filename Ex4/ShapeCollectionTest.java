@@ -10,8 +10,7 @@ import Exe.Ex4.geo.*;
 
 class ShapeCollectionTest {
 	@Test
-	void test() {
-		
+	void testAll() {
 		// our collection of work
 		ShapeCollection shapes = new ShapeCollection();
 		// create gui shape
@@ -40,7 +39,44 @@ class ShapeCollectionTest {
 		assertEquals(3, shapes.size());
 		assertEquals(1, shapesCopy.size());
 		
-		//SORTING TESTS
+		//SOME SORTING TESTS
 		// sort by area
+		ShapeComp byArea = new ShapeComp(Ex4_Const.Sort_By_Area);
+		shapes.sort(byArea);
+		// we use the shapes' tag for checking
+		assertEquals(segGui.getTag(), shapes.get(0).getTag()); // Segment should be first
+		assertEquals(triGui.getTag(), shapes.get(1).getTag()); // Triangle should be second
+		assertEquals(crGui.getTag(), shapes.get(2).getTag()); // Circle should be last
+		
+		// sort by anti perimeter
+		ShapeComp byAntiPerimeter = new ShapeComp(Ex4_Const.Sort_By_Anti_Perimeter);
+		shapes.sort(byAntiPerimeter);
+		// should be circle-triangle-segment
+		assertEquals(crGui.getTag(), shapes.get(0).getTag());
+		assertEquals(triGui.getTag(), shapes.get(1).getTag());
+		assertEquals(segGui.getTag(), shapes.get(2).getTag());
+		
+		// BOUNDING BOX TEST
+		/*
+		 * These should be the points of the rect
+		 * containing all the shapes in the collection
+		 * (got by simple check of min and max points values)
+		 */
+		Point2D p1BBox = new Point2D(-2,-2);
+		Point2D p2BBox = new Point2D(8,-2);
+		Point2D p3BBox = new Point2D(8,9);
+		Point2D p4BBox = new Point2D(-2,9);
+		Rect2D boundingRect = shapes.getBoundingBox();
+		assertEquals(p1BBox, boundingRect.get_p1());
+		assertEquals(p2BBox, boundingRect.get_p2());
+		assertEquals(p3BBox, boundingRect.get_p3());
+		assertEquals(p4BBox, boundingRect.get_p4());
+		
+		// REMOVE ALL TEST
+		shapes.removeAll();
+		assertEquals(0, shapes.size());
+
+
+		
 	}
 }
