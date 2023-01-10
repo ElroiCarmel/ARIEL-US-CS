@@ -42,7 +42,7 @@ class GUIShapeTest {
 		assertEquals(gs.getColor().getRGB(),Color.BLACK.getRGB());	
 		
 		// Test Triangle
-		String str1 = "GUIShape,-16777216,true,1,Triangle2D,3.0,3.0,7.0,7.0,5.0,5.0"; // A segment data 
+		String str1 = "GUIShape,-16777216,true,1,Triangle2D,3.0,3.0,7.0,7.0,5.0,5.0"; 
 		String [] ww1 = shapeStr.split(",");
 		assertEquals(ww1[2], "true");
 		gs = new GUIShape(str1);
@@ -53,7 +53,7 @@ class GUIShapeTest {
 		assertEquals(gs.getColor().getRGB(),Color.BLACK.getRGB());	
 		
 		// Polygon test
-		String str2 = "GUIShape,-16777216,true,2,Polygon2D,1,2,2.0,7.0,7.0,7.0,4.0,4.0,8.0,4.0"; // A polygon data 
+		String str2 = "GUIShape,-16777216,true,2,Polygon2D,1,2,2.0,7.0,7.0,7.0,4.0,4.0,8.0,4.0"; 
 		String [] ww2 = shapeStr.split(",");
 		assertEquals(ww2[2], "true");
 		
