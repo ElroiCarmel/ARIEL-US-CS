@@ -17,6 +17,7 @@ public class ShapeComp implements Comparator<GUI_Shapeable>{
 	
 	
 	public static final Comparator<GUI_Shapeable> CompByToString = new ShapeComp(Ex4_Const.Sort_By_toString);
+	public static final Comparator<GUI_Shapeable> CompByAntiToString = new ShapeComp(Ex4_Const.Sort_By_Anti_toString);
 	public static final Comparator<GUI_Shapeable> CompByArea = new ShapeComp(Ex4_Const.Sort_By_Area);
 	public static final Comparator<GUI_Shapeable> CompByAntiArea = new ShapeComp(Ex4_Const.Sort_By_Anti_Area);
 	public static final Comparator<GUI_Shapeable> CompByPerimeter = new ShapeComp(Ex4_Const.Sort_By_Perimeter);
@@ -34,6 +35,9 @@ public class ShapeComp implements Comparator<GUI_Shapeable>{
 	public int compare(GUI_Shapeable o1, GUI_Shapeable o2) {
 		int ans=0;
 		if(_flag == Ex4_Const.Sort_By_toString) {
+			ans = o2.toString().compareTo(o1.toString());
+		}
+		if (_flag == Ex4_Const.Sort_By_Anti_toString) {
 			ans = o1.toString().compareTo(o2.toString());
 		}
 		//////////add your code below ///////////
