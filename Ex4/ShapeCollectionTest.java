@@ -9,10 +9,6 @@ import org.junit.jupiter.api.Test;
 import Exe.Ex4.geo.*;
 
 class ShapeCollectionTest {
-		static
-	
-	
-	
 	@Test
 	void test() {
 		
