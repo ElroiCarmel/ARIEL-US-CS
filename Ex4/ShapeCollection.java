@@ -45,8 +45,9 @@ public class ShapeCollection implements ShapeCollectionable{
 	@Override
 	public GUI_Shapeable removeElementAt(int i) {
 		//////////add your code below ///////////
+		GUI_Shapeable ans = _shapes.get(i).copy();
 		_shapes.remove(i);
-		return _shapes.get(i);
+		return ans;
 		//////////////////////////////////////////
 	}
 
