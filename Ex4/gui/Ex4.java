@@ -231,6 +231,9 @@ public class Ex4 implements Ex4_GUI {
 		if (p.equals("ByToString")) {
 			_shapes.sort(ShapeComp.CompByToString);
 		}
+		if (p.equals("ByAntiToString")) {
+			_shapes.sort(ShapeComp.CompByAntiToString);
+		}
 		if (p.equals("ByArea")) {
 			_shapes.sort(ShapeComp.CompByArea);
 		}
