@@ -131,7 +131,8 @@ public class Polygon2D implements GeoShapeable{
 	@Override
 	public Point2D[] getPoints() {
 		// TODO Auto-generated method stub
-		return (Point2D[]) _points.toArray();
+		Point2D[] ans = _points.toArray(new Point2D[_points.size()]);
+		return  ans;
 	}
 	////////////Private Functions////////////////
 	public double[] getX() {
