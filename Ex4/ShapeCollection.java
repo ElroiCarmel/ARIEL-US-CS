@@ -16,6 +16,7 @@ import Exe.Ex4.geo.Polygon2D;
 import Exe.Ex4.geo.Rect2D;
 import Exe.Ex4.geo.Segment2D;
 import Exe.Ex4.geo.Triangle2D;
+import Exe.Ex4.gui.Ex4;
 
 /**
  * This class represents a collection of GUI_Shape.
@@ -62,6 +63,7 @@ public class ShapeCollection implements ShapeCollectionable{
 	public void add(GUI_Shapeable s) {
 		if(s!=null && s.getShape()!=null) {
 			_shapes.add(s);
+			Ex4.incrementTagCounter();
 		}
 	}
 	@Override
@@ -88,6 +90,7 @@ public class ShapeCollection implements ShapeCollectionable{
 	public void removeAll() {
 		//////////add your code below ///////////
 		_shapes.clear();
+		Ex4.resetTagCounter();
 		
 		//////////////////////////////////////////
 	}

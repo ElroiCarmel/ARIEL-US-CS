@@ -12,6 +12,7 @@ import Exe.Ex4.geo.Circle2D;
 import Exe.Ex4.geo.GeoShapeable;
 import Exe.Ex4.geo.Point2D;
 import Exe.Ex4.geo.Polygon2D;
+import Exe.Ex4.geo.Rect2D;
 import Exe.Ex4.geo.Segment2D;
 import Exe.Ex4.geo.Triangle2D;
 
@@ -104,7 +105,7 @@ public class GUIShape implements GUI_Shapeable{
 			p = new Point2D(Double.parseDouble(ww[5]),Double.parseDouble(ww[6])); // parse to the x,y values
 		}
 
-		else if (info.compareTo("Circle2D") == 0) {
+		else if (info.equals("Circle2D")) {
 			double x = 0, y = 0;
 			x = Double.parseDouble(ww[5]);
 			y = Double.parseDouble(ww[6]);
@@ -113,7 +114,7 @@ public class GUIShape implements GUI_Shapeable{
 			_g = new Circle2D(center,radius);
 		}
 
-		else if (info.compareTo("Rect2D") == 0) {
+		else if (info.equals("Rect2D")) {
 			
 			double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0, x4 = 0, y4= 0;
 
@@ -132,17 +133,17 @@ public class GUIShape implements GUI_Shapeable{
 			p3 = new Point2D(x3,y3);
 			p4 = new Point2D(x4,y4);
 			
-			ArrayList<Point2D> rectPoints = new ArrayList<Point2D>();
-			rectPoints.add(p1);
-			rectPoints.add(p2);
-			rectPoints.add(p3);
-			rectPoints.add(p4);
+//			ArrayList<Point2D> rectPoints = new ArrayList<Point2D>();
+//			rectPoints.add(p1);
+//			rectPoints.add(p2);
+//			rectPoints.add(p3);
+//			rectPoints.add(p4);
 		
-			_g = new Polygon2D(rectPoints);
+			_g = new Rect2D(p1,p2,p3,p4);
 			
 		}
 
-		else if (info.compareTo("Segment2D") == 0) {
+		else if (info.equals("Segment2D")) {
 			double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 
 			x1=Double.parseDouble(ww[5]);
@@ -156,7 +157,7 @@ public class GUIShape implements GUI_Shapeable{
 			_g = new Segment2D(p1, p2);
 		}
 		
-		else if (info.compareTo("Triangle2D") == 0) {
+		else if (info.equals("Triangle2D")) {
 			double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
 			x1=Double.parseDouble(ww[5]);
 			y1=Double.parseDouble(ww[6]);
@@ -173,7 +174,7 @@ public class GUIShape implements GUI_Shapeable{
 			_g = new Triangle2D(p1, p2, p3);
 		}
 		
-		else if (info.compareTo("Polygon2D") == 0) {
+		else if (info.equals("Polygon2D")) {
 			ArrayList<Point2D> polyPoints = new ArrayList<Point2D>();
 			for (int i = 5; i<ww.length; i = i+2) {
 				Point2D pol = new Point2D(Double.parseDouble(ww[i]),Double.parseDouble(ww[i+1]));
