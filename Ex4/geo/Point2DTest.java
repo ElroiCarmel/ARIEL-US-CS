@@ -11,12 +11,13 @@ class Point2DTest {
 	
 	@BeforeEach
 	void clearPoint() {
+	// Since the point's values change in the tests
+	// we want to "reset" it's values.
 	src = new Point2D(2,9);
 	}
 	
 	@Test
 	void testMove() {
-//		Point2D p1 = new Point2D(2,9);
 		src.move(new Point2D(4,7));
 		assertEquals(6, src.x(), Ex4_Const.EPS1);
 		assertEquals(16, src.y(), Ex4_Const.EPS1);

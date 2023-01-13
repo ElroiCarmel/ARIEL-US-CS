@@ -12,7 +12,6 @@ import Exe.Ex4.Ex4_Const;
 
 class Polygon2DTest {
 	static Polygon2D src;
-//	static ArrayList<Point2D> points;
 	static Point2D p1, p2, p3, p4, p5, p6;
 	
 	
@@ -20,7 +19,6 @@ class Polygon2DTest {
 	@BeforeEach
 	void setUpPolygon() {
 		src = new Polygon2D();
-//		points = new ArrayList<Point2D>();
 		p1 = new Point2D(0,0);
 		p2 = new Point2D(4,0);
 		p3 = new Point2D(4,4);
@@ -35,6 +33,7 @@ class Polygon2DTest {
 		src.addPoint(p6);
 	}
 
+	
 	@Test
 	void testContains() {
 		Point2D p1 = new Point2D(6,2);

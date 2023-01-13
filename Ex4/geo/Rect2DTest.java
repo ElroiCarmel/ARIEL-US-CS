@@ -46,7 +46,7 @@ class Rect2DTest {
 
 	@Test
 	void testMove() {
-		// Click on to points to create a vector 
+		// Click on two points to create a vector 
 		Point2D p0 = new Point2D(4.4375, 6.93751);
 		Point2D p1 = new Point2D(7.0, 7.593751);
 		src.move(p0.vector(p1));
@@ -76,7 +76,7 @@ class Rect2DTest {
 	}
 
 	@Test
-	void testScale1() {
+	void testScale() {
 		src.scale(new Point2D(4.25,8.8751), 1.1);
 		// create the 4 points with the expected values
 		Point2D p1Test = new Point2D(3.15,5.196875);

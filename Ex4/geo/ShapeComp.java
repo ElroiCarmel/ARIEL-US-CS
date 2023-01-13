@@ -35,10 +35,14 @@ public class ShapeComp implements Comparator<GUI_Shapeable>{
 	public int compare(GUI_Shapeable o1, GUI_Shapeable o2) {
 		int ans=0;
 		if(_flag == Ex4_Const.Sort_By_toString) {
-			ans = o2.toString().compareTo(o1.toString());
+			String[] temp1 = o1.toString().split(",");
+			String[] temp2 = o2.toString().split(",");
+			ans = temp1[4].compareTo(temp2[4]);
 		}
 		if (_flag == Ex4_Const.Sort_By_Anti_toString) {
-			ans = o1.toString().compareTo(o2.toString());
+			String[] temp1 = o1.toString().split(",");
+			String[] temp2 = o2.toString().split(",");
+			ans = temp2[4].compareTo(temp1[4]);
 		}
 		//////////add your code below ///////////
 		if(_flag == Ex4_Const.Sort_By_Area) {

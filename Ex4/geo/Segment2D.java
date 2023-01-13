@@ -18,6 +18,12 @@ public class Segment2D implements GeoShapeable{
 	private Point2D _p1;
 	private Point2D _p2;
 	
+	public Point2D get_p1() {
+		return _p1;
+	}
+	public Point2D get_p2() {
+		return _p2;
+	}
 	public Segment2D(Point2D p1, Point2D p2) {
 		this._p1 = new Point2D(p1);
 		this._p2 = new Point2D(p2);
