@@ -1,5 +1,5 @@
 package Exe.Ex4.gui;
-
+// ID: 208762971
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -43,7 +43,7 @@ public class Ex4 implements Ex4_GUI {
 	private Point2D _p2; // For drawing Triangle2D
 	private ArrayList<Point2D> _polyPoints = new ArrayList<>(); // For drawing Polygon2D
 	
-	private int shapeCount=0;
+	private static int _tagCounter=0;
 	private static Ex4 _winEx4 = null;
 
 	private Ex4() {
@@ -201,7 +201,7 @@ public class Ex4 implements Ex4_GUI {
 		}
 		if (p.equals("Clear")) {
 			_shapes.removeAll();
-			shapeCount=0;
+			_tagCounter=0;
 		}
 		if (p.equals("Remove")) {
 			remove();
@@ -306,7 +306,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
-				shapeCount++;
+//				_tagCounter++;
 				_gs = null;
 				_p1 = null;
 			}
@@ -329,7 +329,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
-				shapeCount++;
+//				_tagCounter++;
 				_gs = null;
 				_p1 = null;
 				_p2 = null;
@@ -342,7 +342,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
-				shapeCount++;
+//				_tagCounter++;
 				_gs = null;
 				_p1 = null;
 			}
@@ -354,7 +354,7 @@ public class Ex4 implements Ex4_GUI {
 				_gs.setColor(_color);
 				_gs.setFilled(_fill);
 				_shapes.add(_gs);
-				shapeCount++;
+//				_tagCounter++;
 				_gs = null;
 				_p1 = null;
 			}
@@ -445,7 +445,7 @@ public class Ex4 implements Ex4_GUI {
 			GeoShapeable g = s.getShape();
 			if (s.isSelected() && g != null) {				
 				GUI_Shapeable temp = s.copy();
-				temp.setTag(shapeCount++); 
+				temp.setTag(_tagCounter); 
 				temp.getShape().move(_p1);
 				_shapes.add(temp);
 
@@ -477,9 +477,9 @@ public class Ex4 implements Ex4_GUI {
 		System.out.println("right click!");
 		if (_mode.equals("Polygon") && _gs!=null) {
 			Polygon2D poly = new Polygon2D(_polyPoints);
-			_gs = new GUIShape(poly, _fill, _color, shapeCount);
+			_gs = new GUIShape(poly, _fill, _color, _tagCounter);
 			_shapes.add(_gs);
-			shapeCount++;
+//			_tagCounter++;
 			_gs = null;
 			_p1 = null;
 			_polyPoints.clear();
@@ -499,7 +499,7 @@ public class Ex4 implements Ex4_GUI {
 			double x1 = StdDraw_Ex4.mouseX();
 			double y1 = StdDraw_Ex4.mouseY();
 			GeoShapeable gs = null;
-			//			System.out.println("M: "+x1+","+y1);
+//			System.out.println("M: "+x1+","+y1);
 			Point2D p = new Point2D(x1, y1);
 			if (_mode.equals("Circle")) {
 				double r = _p1.distance(p);
@@ -526,7 +526,7 @@ public class Ex4 implements Ex4_GUI {
 				gs = new Rect2D(_p1, p2, p, p4);
 			}
 
-			_gs = new GUIShape(gs, false, Color.pink, shapeCount);
+			_gs = new GUIShape(gs, false, Color.pink, _tagCounter);
 			drawShapes();
 		}
 	}
@@ -551,5 +551,14 @@ public class Ex4 implements Ex4_GUI {
 			ans += s.toString() + "\n";
 		}
 		return ans;
+	}
+	public static int getTagCounter() {
+		return _tagCounter;
+	}
+	public static void incrementTagCounter() {
+		_tagCounter++;
+	}
+	public static int resetTagCounter() {
+		return _tagCounter=0;
 	}
 }
