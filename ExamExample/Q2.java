@@ -6,7 +6,7 @@ public class Q2 {
         test.add("aa");
         test.add(" b b ");
         test.add("c");
-        String testLine = "";
+        String testLine = " b b caa ";
         System.out.println(isPer(test, testLine));
     }
     public static boolean isPer(ArrayList<String> words, String line) {

@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class F2 {
     //data
     private double _a;
@@ -10,15 +13,6 @@ public class F2 {
         this._c=c;
     }
     //methods
-//    public double get_a() {
-//        return this._a;
-//    }
-//    public double get_b() {
-//        return this._b;
-//    }
-//    public double get_c() {
-//        return this._c;
-//    }
     public double f(double x) {
         return _a*x*x+_b*x+_c;
     }
@@ -34,5 +28,21 @@ public class F2 {
        }
        return -p._b/(2*p._a);
     }
-
+    public static int numberRoots(F2 p) {
+        double delta = p._b*p._b-4*p._a*p._c;
+        int ans = 0;
+        if (delta>0) ans = 2;
+        if (delta==0) ans = 1;
+        return ans;
+    }
+    public static void sort(ArrayList<F2> l) {
+        F2Comp nn = new F2Comp();
+        Collections.sort(l, nn);
+    }
+    @Override
+    public String toString() {
+        String ans = "";
+        ans = _a+"x^2+"+_b+"x+" +_c;
+        return ans;
+    }
 }
