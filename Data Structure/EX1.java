@@ -1,13 +1,11 @@
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+
 
 public class EX1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] test = {1,4,4,4,4,4,6,8,9,10};
-		System.out.println(ones(test, in));
+		System.out.println(ones(test, 4));
 	}
 	public static int ones(int[] a, int k) {
 		// find last index
