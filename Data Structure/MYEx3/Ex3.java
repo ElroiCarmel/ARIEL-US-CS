@@ -19,9 +19,9 @@ public class Ex3 {
 	 *    **5*  *7**
 	 * so Node "5" range is (Parent's key, Parent's right limit) = (4 , 6) 
 	 * 
-	 * @param current. The current tree's node
-	 * @param min. Left limit of the node's range
-	 * @param max. Right limit of the node's range
+	 * @param current The current tree's node
+	 * @param min Left limit of the node's range
+	 * @param max Right limit of the node's range
 	 * @return boolean whether the tree is a valid binary search tree
 	 */
 	private static boolean isValidBST(Node current, int min, int max) {
@@ -44,9 +44,9 @@ public class Ex3 {
 	 * since null nodes are considered as leaves in a RBT. Than we check whether
 	 * the number of black nodes from the root to that null node is valid (with
 	 * the help of "blacksInPath" function).
-	 * @param current. The current node of the tree.
-	 * @param blacksCount. The number of black nodes from the root to this node.
-	 * @param check. The exact number of black nodes each path should have.
+	 * @param current The current node of the tree.
+	 * @param blacksCount The number of black nodes from the root to this node.
+	 * @param check The exact number of black nodes each path should have.
 	 * @return true if all paths from root to a null/leaf contain same number of black nodes
 	 *         else returns false.
 	 */
@@ -61,9 +61,9 @@ public class Ex3 {
 	/**
 	 * Simple function that counts how many black nodes are there
 	 * in the path from the root to the most right leaf.
-	 * Since in a RBT all routes must containsame number of black nodes
+	 * Since in a RBT all routes must contain the same number of black nodes
 	 * it's enough to choose one path.
-	 * @param root. The RBT root
+	 * @param root The RBT root
 	 * @return Number of black nodes from root to most-right leaf
 	 */
 	private static int blacksInPath(Node root) {
